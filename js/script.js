@@ -160,7 +160,6 @@ function activityValidate() {
 };
 
 form.addEventListener ('submit', (e)=> {
-    e.preventDefault()
     nameTest = inputValidate(nameInput, /^[a-z]+$/i);
     emailTest = inputValidate(email, /^[^@]+@[^@]+\.com$/i);
     activityTest = activityValidate();
