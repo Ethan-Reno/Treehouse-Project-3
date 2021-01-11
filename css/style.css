@@ -237,7 +237,7 @@ button:hover {
   color: red;
 }
 
-.not-valid .error-border {
+label.not-valid input {
   border: 1px solid red;
 }
 
@@ -245,7 +245,7 @@ button:hover {
   color: red;
 }
 
-.valid::after {
+label.valid::after {
   content: ' ';
   position: absolute;
   top: -5px;
@@ -257,7 +257,7 @@ button:hover {
   transition: all 0.3s ease-out;
 }
 
-.not-valid::after {
+label.not-valid::after {
   content: ' ';
   position: absolute;
   top: -5px;

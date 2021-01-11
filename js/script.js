@@ -8,6 +8,7 @@ const cvvNum = document.getElementById('cvv');
 const otherJobRole = document.getElementById('other-job-role');
 const shirtDesigns = document.getElementById('design');
 const shirtColors = document.getElementById('shirt-colors');
+const shirtSelect = document.getElementById('color');
 let totalCost = document.getElementById('activities-cost');
 const activities = document.getElementById('activities');
 const checkboxes = document.querySelectorAll('input[type=checkbox]');
@@ -58,10 +59,12 @@ shirtDesigns.addEventListener ('change', (e)=> {
         hideElementsByClass('heart js');
         showElementsByClass('js puns')
         shirtColors.removeAttribute('hidden');
+        shirtSelect.value = "placeholder";
     } else if (e.target.value === "heart js") {
         hideElementsByClass('js puns');
         showElementsByClass('heart js')
         shirtColors.removeAttribute('hidden');
+        shirtSelect.value = "placeholder";
     }
 });
 
@@ -93,21 +96,26 @@ totalCost.innerHTML = `Total: $${runningTotal}`;
 });
 
 // This event handler will display payment information only for the payment method that is selected in the "payment-methods" element.
+let ccTrue = true;
 paymentMethods.addEventListener ('change', (e)=> {
     if (e.target.value === 'paypal') {
         hideElementById('credit-card');
         hideElementById('bitcoin')
         showElementById('paypal')
+        ccTrue = false;
     } else if (e.target.value === 'bitcoin') {
         hideElementById('credit-card');
         hideElementById('paypal')
         showElementById('bitcoin')
+        ccTrue = false;
+        // function that returns non cc to pass to an if in the validation section?
     } else {
         hideElementById('bitcoin');
         hideElementById('paypal')
         showElementById('credit-card');
-
+        ccTrue = true;
     }
+    return ccTrue;
 });
 
 // These functions will display or hide a tip that communicates the validation rule for each input.
@@ -166,17 +174,23 @@ form.addEventListener ('submit', (e)=> {
     creditTest = inputValidate(creditNum, /^\d{13,16}$/);
     zipTest = inputValidate(zipNum, /^\d{5}$/);
     cvvTest = inputValidate(cvvNum, /^\d{3}$/);
-    if (nameTest === false || 
-        emailTest === false ||
-        activityTest < 1 ||
-        creditTest === false ||
-        zipTest === false ||
-        cvvTest === false) {
-            e.preventDefault()
+    if (ccTrue === true) {
+        if (nameTest === false || 
+            emailTest === false ||
+            activityTest.length < 1 ||
+            creditTest === false ||
+            zipTest === false ||
+            cvvTest === false) {
+                e.preventDefault();
+            }
+    } else if (ccTrue === false) {
+        if (nameTest === false || 
+            emailTest === false ||
+            activityTest.length < 1) {
+                e.preventDefault();
+            }
     }
 });
-
-
 
 // These follow two loops iterate over all checkboxes and apply or remove .focus class to style if they are focused.
 for (let i = 0; i < checkboxes.length; i ++) {
