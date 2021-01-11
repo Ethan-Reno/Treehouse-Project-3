@@ -18,3 +18,10 @@ In the future, this project will include additional features, including:
     - if an email input is invalid because it does not include an @ symbol, the error message will display: "A valid email must include an @ symbol".
     - if an email input is invalid because it includes two @@ symbols, the error message will display: "A valid email cannot include two @ symbols".
     - This feature can include a wide variety of error messages - I have yet to decide on how many conditions will be accepted.
+
+Bugfixes - 11/01/2021
+- The t-shirt color option will now correctly display a placeholder when switching between t-shirt themes.
+- An error icon will no longer appear on the form element when a validation error is present anywhere in the form.
+- Validation will no longer fail if credit card fields are invalid when a different payment method is selected.
+- A red border will no longer remain on an input element that displayed a validation error once the error has been resolved.
+- The form will no longer submit if an activity has not been selected.
